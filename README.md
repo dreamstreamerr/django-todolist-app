@@ -20,14 +20,14 @@ It’s just a small project to practice Django and build something useful.
 
 2. Install dependencies:
    ```bash
-pip install -r requirements.txt
+   pip install -r requirements.txt
 
 3. Run migrations:
    ```bash
-python manage.py migrate
+   python manage.py migrate
 
 4. Start the server:
    ```bash
-python manage.py runserver
+   python manage.py runserver
 
  Then open http://127.0.0.1:8000/ in your browser.
