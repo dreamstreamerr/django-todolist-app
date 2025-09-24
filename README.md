@@ -18,18 +18,12 @@ It’s just a small project to practice Django and build something useful.
    ```bash
    git clone https://github.com/dreamstreamerr/django-todolist-app.git
 Install dependencies:
-
-bash
-Copy code
 pip install -r requirements.txt
+
 Run migrations:
-
-bash
-Copy code
 python manage.py migrate
-Start the server:
 
-bash
-Copy code
+Start the server:
 python manage.py runserver
+
 Then open http://127.0.0.1:8000/ in your browser.
