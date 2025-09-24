@@ -1,5 +1,7 @@
 # Django To Do List App
 ![Django](https://img.shields.io/badge/Built%20with-Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python&logoColor=white)
+
 
 This is a To Do List web app built with Django.  
 It includes basic features like:
