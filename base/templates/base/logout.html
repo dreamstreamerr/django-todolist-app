@@ -1,0 +1,27 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <h1>Logout</h1>
+</div>
+
+<div class="card-body">
+
+
+        <p>Do you want to leave?</p>
+    <div style="display: flex; gap: 10px; align-items: center;">
+        <form  method="POST" action="{% url 'login' %}" style="display: inline-block; margin: 0;">
+        {% csrf_token %}
+        <div style="display: flex; gap: 10px;">
+            <input type="submit" class="button" value="Yes">
+        </div>
+        </form>
+        <a href="{% url 'tasks' %}" class="button">No</a>
+    </div>
+
+
+
+</div>
+
+
+{% endblock content %}

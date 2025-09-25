@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
@@ -17,6 +19,10 @@ class CustomLoginView(LoginView):
     redirect_authenticated_user = True
     def get_success_url(self):
         return reverse_lazy('tasks')
+
+class CustomLogoutView(LogoutView):
+    template_name = 'base/logout.html'
+
 
 class RegisterPage(FormView):
     template_name = 'base/register.html'
