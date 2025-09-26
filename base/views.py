@@ -5,14 +5,17 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from base.models import Task
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
 
+from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
-# from django.contrib.auth.views import LogoutView
+# from django.contrib.auth.views import LogoutView توی دکمه no دچار مشکل شدم باهاش.
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 class CustomLoginView(LoginView):
@@ -25,7 +28,6 @@ class CustomLoginView(LoginView):
 # class CustomLogoutView(LogoutView):
 #     template_name = 'base/logout.html'
 @login_required
-
 def logout_confirm(request):
     if request.method == "POST":
         logout(request)
@@ -87,3 +89,16 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
+
+@login_required
+@csrf_exempt
+def toggle_task(request, pk):
+    if request.method == "POST":
+        try:
+            task = Task.objects.get(pk=pk, user=request.user)
+            task.complete = not task.complete  # برعکس کردن وضعیت
+            task.save()
+            return JsonResponse({"success": True, "complete": task.complete})
+        except Task.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Task not found"})
+    return JsonResponse({"success": False, "error": "Invalid request"})

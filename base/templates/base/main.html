@@ -59,11 +59,15 @@
             border-top: 1px solid rgb(226, 226, 226);
         }
 
-        .task-title{
+        .task-item{
             display: flex;
         }
 
         .task-title a{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Raleway', sans-serif ;
             text-decoration: none;
             color: #4b5156;
             margin-left: 10px;
@@ -89,6 +93,8 @@
             color: #93bbd0;
             font-size: 22px;
             line-height: 0;
+            margin-left: auto;
+            padding: 10px;
         }
 
         #search-add-wrapper{
@@ -133,6 +139,25 @@
         .card-body{
             padding: 20px;
         }
+        .task-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .circle-btn {
+            border: none;
+            background: transparent;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 8px; /* فاصله بین دکمه و متن */
+        }
+
+        .line-through {
+            text-decoration: line-through;
+            color: gray;
+        }
+
 
     </style>
 </head>
