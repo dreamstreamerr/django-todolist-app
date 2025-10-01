@@ -96,9 +96,16 @@ def toggle_task(request, pk):
     if request.method == "POST":
         try:
             task = Task.objects.get(pk=pk, user=request.user)
-            task.complete = not task.complete  # برعکس کردن وضعیت
+            task.complete = not task.complete
             task.save()
-            return JsonResponse({"success": True, "complete": task.complete})
+
+            incomplete_count = Task.objects.filter(user=request.user, complete=False).count()
+
+            return JsonResponse({
+                "success": True,
+                "complete": task.complete,
+                "incomplete_count": incomplete_count
+            })
         except Task.DoesNotExist:
             return JsonResponse({"success": False, "error": "Task not found"})
     return JsonResponse({"success": False, "error": "Invalid request"})

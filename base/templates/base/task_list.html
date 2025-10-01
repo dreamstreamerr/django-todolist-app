@@ -20,7 +20,7 @@
 </div>
 
 <div id="search-add-wrapper">
-    <form action="" method="GET" style="margin-top: 20px; display: flex">
+    <form action="" method="GET" style="margin-top: 20px; margin-bottom: 20px; display: flex;">
         <input type="text" name="search-area" value="{{ search_input }}">
         <input class="button" type="submit" value="search">
     </form>
@@ -50,7 +50,21 @@
 
 
 <script>
-// گرفتن همه دکمه‌های دایره
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 document.querySelectorAll(".circle-btn").forEach(button => {
     button.addEventListener("click", function() {
         const taskId = this.getAttribute("data-id");
@@ -69,33 +83,21 @@ document.querySelectorAll(".circle-btn").forEach(button => {
 
                 if (data.complete) {
                     this.innerHTML = '<div class="task-complete-icon"></div>';
-
                     title.classList.add("line-through");
                 } else {
                     this.innerHTML = '<div class="task-incomplete-icon"></div>';
-
                     title.classList.remove("line-through");
+                }
+
+                // 🔹 آپدیت شمارنده
+                const counter = document.querySelector("h3 strong");
+                if (counter && data.incomplete_count !== undefined) {
+                    counter.innerText = data.incomplete_count;
                 }
             }
         });
     });
 });
-
-// تابع گرفتن CSRF از کوکی
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-        const cookies = document.cookie.split(";");
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + "=")) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
 </script>
 
 {% endblock content%}
